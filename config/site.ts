@@ -8,7 +8,7 @@ export const siteConfig = {
   URL: 'https://landing-template.vercel.app/',
   REPO_URL: 'https://github.com/olewandowski1/landing-template/',
 
-  OG_IMAGE_URL: '/og-image.png',
+  OG_IMAGE_URL: '/og-image.svg',
 
   DESCRIPTION:
     'A modern landing page starter built for speed, SEO, and conversions.',
