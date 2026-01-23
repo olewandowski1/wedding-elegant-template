@@ -1,91 +1,188 @@
 ---
 name: shadcn-component-research
-description: Maps landing page requirements, visual identity, motion, and SEO goals to shadcn/ui components and implementation patterns using Next.js and Tailwind.
+description: Maps approved landing page requirements to shadcn/ui components and external landing/marketing block registries, producing a concrete, performance-aware implementation plan.
 ---
 
 # Shadcn Landing Page Component Research Skill
 
-This skill translates structured landing page requirements into concrete
-component choices, layout patterns, motion strategies, and SEO-friendly
-structures.
+This skill translates an approved **`REQUIREMENTS.md`** document into a concrete,
+implementation-ready **implementation plan**.
 
-## When to use this skill
+It MUST be invoked **after `shadcn-requirements`** and MUST use
+`REQUIREMENTS.md` as its **only source of truth**.
 
-- Requirements and vibe are defined
-- Component-level planning is needed
-- SEO and theme consistency matter
+This skill does NOT implement UI or write production code.
 
-## Assumed tech stack
+External landing/marketing registries are treated as first-class sources.
+
+---
+
+## Invocation Rule (MANDATORY)
+
+- This skill MUST be invoked only after **`shadcn-requirements`**
+- The input to this skill MUST be: `REQUIREMENTS.md`.
+- No assumptions, reinterpretations, or new requirements may be introduced
+- Any ambiguity found in `REQUIREMENTS.md` MUST be surfaced, not guessed
+
+---
+
+## Output Contract (MANDATORY)
+
+- The output of this skill MUST be a file named: `IMPLEMENTATION_PLAN.md`
+- `IMPLEMENTATION-PLAN.md` is the **single source of truth** for:
+- Component and block selection
+- Section structure and composition
+- Asset requirements (images, icons, media)
+- Motion and SEO intent
+
+- This skill MUST stop after producing `IMPLEMENTATION-PLAN.md`
+
+- No UI implementation may begin until this file exists
+
+---
+
+## When to Use This Skill
+
+- `REQUIREMENTS.md` has been completed and approved
+- Proven landing page patterns are preferred
+- Performance, SEO, and accessibility must be preserved
+
+---
+
+## Assumed Tech Stack
 
 - Next.js (App Router)
 - TypeScript
 - shadcn/ui
 - Tailwind CSS
-- Motion: **Framer Motion or Tailwind animations**
-- `next-themes`
+- Framer Motion
+- SEO via Next.js metadata APIs
 
-## How to use this skill
+---
 
-1. Read the output from **shadcn-requirements**
-2. Map each section to:
-   - shadcn/ui components
-   - Semantic HTML structure
-   - Motion approach
-3. Use the Shadcn MCP server to verify components and install commands
+## Component Sources
 
-## Required output format
+The researcher MAY use:
 
-### Global Setup
+- shadcn/ui components
+- External landing / marketing block registries (e.g. Tailark)
 
-- Semantic layout structure (`header`, `main`, `section`, `footer`)
-- Theme token strategy (shadcn variables)
-- Light/dark mode handling with `next-themes`
-- Global SEO considerations (metadata, headings)
+External blocks may be installed and adapted as needed.
 
-### Typography & Content Mapping
+---
 
-- Heading hierarchy per section
-- Text density recommendations
-- Responsive typography strategy
+## Hero Section Rule (MANDATORY)
 
-### Section-by-Section Mapping
+- The Hero section MUST:
+- Be the first visible section
+- Occupy full viewport height (100vh)
+- Contain the primary H1
+- Clearly communicate the core value proposition
 
-For each section:
+---
 
-**shadcn/ui components**
-- Component names
-- Purpose in the section
+## Performance Considerations (MANDATORY)
 
-**Layout & composition**
-- Container strategy
-- Grid / flex usage
-- Reusability notes
+- Prefer lightweight, content-first blocks
+- Avoid heavy background media
+- Avoid excessive DOM complexity
+- Hero content must render immediately
+- Media must not block LCP
 
-**Motion & interaction**
-- Animation method (Framer Motion or Tailwind)
-- Scope and intensity
-- Reduced-motion handling
+---
 
-**SEO notes**
+## Theme Alignment
+
+- All selected blocks must align with the **preferred theme**
+- Blocks must not rely on automatic or system theme switching
+- Any assumptions about dual-theme behavior MUST be flagged
+
+---
+
+## IMPLEMENTATION-PLAN.md Structure
+
+The `IMPLEMENTATION-PLAN.md` file MUST include the following sections:
+
+---
+
+### 1. Global Architecture Notes
+
+- Semantic HTML structure (`header`, `main`, `section`, `footer`)
+- SEO considerations
+- Theme alignment
+- Motion usage strategy
+
+---
+
+### 2. Global Asset Overview
+
+- Total number of images
+- Image types (photography, illustration, decorative)
+- Aspect ratio guidance
+- Priority images (above-the-fold)
+
+---
+
+### 3. Section-by-Section Plan
+
+For EACH section, include:
+
+---
+
+#### Section: <Section Name>
+
+**Purpose**
+- What this section communicates
+
+**Chosen Source**
+- shadcn/ui
+- External registry (name)
+
+**Components / Blocks**
+- Component or block names
+- Installation notes if applicable
+
+**Layout & Composition**
+- Grid / flex strategy
+- Content alignment
+- Responsive behavior
+
+**Assets Required**
+- Number of images
+- Image type (photo / illustration / decorative)
+- Placement (e.g. right-aligned hero image)
+- Content guidance (e.g. “green floral imagery”, “event photography”)
+
+**Motion & Interaction**
+- Framer Motion usage
+- Animation intent and scope
+
+**SEO Notes**
 - Heading level usage
-- Content relevance
-- Crawl-friendly structure
+- Content placement and hierarchy
 
-**Installation**
-- Required `shadcn/ui` CLI commands
+---
 
-## Rules & constraints
+### 4. Open Questions & Risks
 
-- Prefer semantic HTML over div-only layouts
-- Motion must not block content rendering
-- Avoid animations that harm CLS or LCP
-- Call out custom components explicitly
+- Missing assets
+- Unclear content
+- Performance or accessibility risks
 
-## Handoff
+---
 
-End with an **Implementation Plan Summary**:
-- Theme readiness
-- SEO readiness
-- Section complexity
+## Rules & Constraints
 
-This output is intended for **shadcn-ui-builder**.
+- Do NOT write production UI code
+- Do NOT reference internal file paths
+- Do NOT assume implementation details
+- All final UI components must fit inside `@/components`
+- All recommendations must respect performance and accessibility constraints
+
+---
+
+## Handoff Rule
+
+- `IMPLEMENTATION-PLAN.md` is the **only valid input** for `shadcn-ui-builder`
+- Builders MUST follow this plan exactly
+- Deviations MUST be explicitly justified

@@ -1,97 +1,123 @@
 ---
 name: shadcn-requirements
-description: Transforms high-level landing page ideas into structured, SEO-aware, implementation-ready requirements including visual identity, theming, and motion, using Next.js and shadcn/ui.
+description: Transforms high-level landing page ideas into structured, SEO-aware, performance-conscious, implementation-ready requirements with clear visual identity and theme intent.
 ---
 
 # Shadcn Landing Page Requirements Skill
 
 This skill converts loosely defined landing page ideas into a structured,
-SEO-conscious specification optimized for modern, high-quality landing pages.
+production-oriented requirements document optimized for high-quality landing
+websites.
 
-## When to use this skill
+This is a **planning-only skill**.
 
-- The user wants a custom landing page (business, event, personal)
-- Visual direction, branding, or SEO requirements are implicit or unclear
-- A clear plan is needed before component research and implementation
+## Output Contract (MANDATORY)
 
-## Assumed tech stack
+- The output of this skill MUST be a file named: `REQUIREMENTS.md`
+- `REQUIREMENTS.md` is the **single source of truth** for:
+- Visual identity
+- Structure and layout intent
+- Theme and accessibility decisions
+- SEO and performance constraints
+
+- **No further skills may proceed**
+until `REQUIREMENTS.md` is completed and approved.
+
+- This skill MUST stop after producing `REQUIREMENTS.md`.
+
+## When to Use This Skill
+
+- The user requests a custom landing page
+- Visual direction, branding, or SEO requirements are unclear
+- Alignment is required before research or implementation
+
+## Assumed Tech Stack
 
 - Next.js (App Router)
 - TypeScript
 - shadcn/ui
 - Tailwind CSS
-- Motion: **Framer Motion or Tailwind animations**
-- `next-themes` for light/dark mode
+- Framer Motion
+- SEO via Next.js metadata APIs
 
-## What this skill produces
+## REQUIREMENTS.md Structure
 
-Always output a **Landing Page Specification** with the following sections:
+The `REQUIREMENTS.md` file MUST include the following sections:
 
 ### 1. Project Context
-- Landing page type (business, event, wedding, personal, portfolio)
+- Landing page type
 - Target audience
-- Primary goal (conversion, RSVP, contact, booking)
+- Primary business goal
 
 ### 2. Website Vibe & Visual Identity
-- Overall mood (elegant, playful, corporate, romantic, bold, etc.)
+- Overall mood
 - 3–5 brand adjectives
-- Inferred inspiration (if not provided)
+- Inspiration (explicit or inferred)
 
 ### 3. Color System
 - Primary brand color
-- Secondary and accent colors
+- Secondary/accent colors
 - Neutral/background strategy
-- Contrast requirements for accessibility
-- Light vs dark mode intent
+- Contrast considerations
 
 ### 4. Typography
-- Heading font style and tone
-- Body font style and readability goals
-- Emphasis patterns (weights, spacing, casing)
+- Heading style and tone
+- Body text style and readability
+- Emphasis patterns
 
-### 5. Theme & Mode Strategy
-- Default theme (light or dark)
-- Dark mode behavior and parity
-- Theme switching via `next-themes`
-- System preference handling
+### 5. Theme Strategy
+- Define a **preferred theme** (light OR dark)
+- Explicitly state whether theme switching is:
+- Enabled, or
+- Disabled
+- Theme choice must be intentional and documented
 
 ### 6. Page Structure & Narrative Flow
-- Section order and storytelling logic
+- Section order
 - Content hierarchy for SEO
-- Persistent elements (nav, CTA, footer)
+- Persistent elements (navigation, CTA)
 
-### 7. Section Breakdown
-For each section:
-- Section name
-- Purpose and message
-- Key interactions
-- Motion intent (none / subtle / expressive)
+### 7. Hero Section (MANDATORY)
+- First section on the page
+- Full viewport height (100vh)
+- Contains the primary H1
+- Clear value proposition
 
 ### 8. Content & Data
 - Static vs dynamic content
-- Forms (contact, RSVP, booking)
-- Validation and submission expectations
+- Forms and interactions
+- Validation expectations
 
 ### 9. SEO Considerations
-- Primary and secondary keywords
-- Heading hierarchy (H1–H6)
+- Target keywords
+- Heading hierarchy
 - Content depth expectations
-- Internal linking opportunities
 
-### 10. Responsiveness & Accessibility
+### 10. Performance & Constraints (MANDATORY)
+- Performance is a first-class feature
+- Avoid heavy media in the hero section
+- Visual decisions must not compromise load time or layout stability
+
+### 11. Responsiveness & Accessibility
 - Mobile-first priorities
 - Keyboard navigation
-- Color contrast and readable font sizes
+- Contrast and font scaling
+- WCAG 2.1 AA baseline expectations
 
-### 11. Assumptions & Open Questions
-- Missing brand assets or copy
-- Sensible defaults
+### 12. Assumptions & Open Questions
+- Missing assets or copy
+- Explicit assumptions
+- Items requiring confirmation
 
-## Output rules
+## Rules & Constraints
 
-- Do NOT reference specific shadcn/ui components
+- Do NOT reference specific UI components
 - Do NOT write code
-- Emphasize clarity, hierarchy, and intent
-- Keep output structured and scannable
+- Do NOT assume implementation details
+- Focus on intent, hierarchy, constraints, and decisions
 
-This output is intended for **shadcn-component-research**.
+## Handoff Rule
+
+- `REQUIREMENTS.md` is the **only valid input** for `shadcn-component-research`
+- Any ambiguity must be resolved at this stage
+- Later skills MUST NOT reinterpret intent
