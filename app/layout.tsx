@@ -4,16 +4,23 @@ import { createMetadata } from '@/lib/metadata';
 import { cn } from '@/lib/utils';
 import '@/styles/globals.css';
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Cormorant_Garamond, Inter, Great_Vibes } from 'next/font/google';
 
-const geistSans = Geist({
+const cormorant = Cormorant_Garamond({
+  variable: '--font-serif',
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+});
+
+const inter = Inter({
   variable: '--font-sans',
   subsets: ['latin'],
 });
 
-const geistMono = Geist_Mono({
-  variable: '--font-mono',
+const handwritten = Great_Vibes({
+  weight: '400',
   subsets: ['latin'],
+  variable: '--font-handwritten',
 });
 
 export const metadata: Metadata = createMetadata({
@@ -21,14 +28,19 @@ export const metadata: Metadata = createMetadata({
   description: siteConfig.DESCRIPTION,
 });
 
-export default function RootLayout({ children }: LayoutProps<'/'>) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang={siteConfig.LOCALE} suppressHydrationWarning>
       <body
         className={cn(
-          'bg-background font-sans antialiased',
-          geistSans.variable,
-          geistMono.variable,
+          'bg-background font-sans antialiased selection:bg-gold/30 selection:text-gold-foreground',
+          inter.variable,
+          cormorant.variable,
+          handwritten.variable,
         )}
       >
         <ThemeProvider

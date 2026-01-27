@@ -1,8 +1,8 @@
-import { ImageResponse } from "next/og";
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
+import { ImageResponse } from 'next/og';
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
 
-import { siteConfig } from "@/config/site";
+import { siteConfig } from '@/config/site';
 
 export const alt = `${siteConfig.NAME} — ${siteConfig.SHORT_DESCRIPTION}`;
 
@@ -11,35 +11,29 @@ export const size = {
   height: 630,
 };
 
-export const contentType = "image/png";
+export const contentType = 'image/png';
 
-function KoniczynkaLogo() {
+function WeddingLogo() {
   return (
     <div
       style={{
-        width: 200,
-        height: 200,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
+        width: 160,
+        height: 160,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
         marginBottom: 32,
         zIndex: 2,
       }}
     >
       <svg
-        viewBox="0 0 100 100"
-        xmlns="http://www.w3.org/2000/svg"
-        style={{ width: "100%", height: "100%" }}
+        viewBox='0 0 100 100'
+        xmlns='http://www.w3.org/2000/svg'
+        style={{ width: '100%', height: '100%' }}
       >
-        <path d="M50 50C50 35 35 25 25 35C15 45 25 60 50 50Z" fill="#14532d" />
-        <path d="M50 50C65 50 75 35 65 25C55 15 40 25 50 50Z" fill="#14532d" />
-        <path d="M50 50C50 65 65 75 75 65C85 55 75 40 50 50Z" fill="#14532d" />
-        <path d="M50 50C35 50 25 65 35 75C45 85 60 75 50 50Z" fill="#166534" />
         <path
-          d="M50 55C50 55 50 85 40 95"
-          stroke="#14532d"
-          strokeWidth="6"
-          strokeLinecap="round"
+          d='M50 85s-35-20-35-45a20 20 0 1 1 40-5 20 20 0 1 1 40 5c0 25-35 45-35 45Z'
+          fill='#c5a028'
         />
       </svg>
     </div>
@@ -51,7 +45,7 @@ export default async function OpenGraphImage() {
 
   try {
     fontData = await readFile(
-      join(process.cwd(), "assets/PlayfairDisplay-Regular.ttf"),
+      join(process.cwd(), 'assets/PlayfairDisplay-Regular.ttf'),
     );
   } catch {
     fontData = new ArrayBuffer(0);
@@ -60,47 +54,44 @@ export default async function OpenGraphImage() {
   return new ImageResponse(
     <div
       style={{
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
         padding: 80,
-        position: "relative",
-
-        // ✅ Higher-contrast background
+        position: 'relative',
         backgroundImage:
-          "linear-gradient(180deg, #ecfdf5 0%, #d1fae5 60%, #a7f3d0 100%)",
-        color: "#14532d",
+          'linear-gradient(180deg, #fafaf9 0%, #f5f5f4 60%, #e7e5e4 100%)',
+        color: '#1c1917',
       }}
     >
-      {/* Stronger radial glow */}
       <div
         style={{
-          position: "absolute",
+          position: 'absolute',
           width: 460,
           height: 460,
-          borderRadius: "50%",
+          borderRadius: '50%',
           background:
-            "radial-gradient(circle, rgba(20,83,45,0.35) 0%, rgba(20,83,45,0.18) 35%, rgba(20,83,45,0.05) 55%, rgba(0,0,0,0) 70%)",
-          top: "45%",
-          left: "50%",
-          transform: "translate(-50%, -60%)",
+            'radial-gradient(circle, rgba(197,160,40,0.15) 0%, rgba(197,160,40,0.08) 35%, rgba(197,160,40,0.03) 55%, rgba(0,0,0,0) 70%)',
+          top: '45%',
+          left: '50%',
+          transform: 'translate(-50%, -60%)',
         }}
       />
 
-      <KoniczynkaLogo />
+      <WeddingLogo />
 
       <div
         style={{
-          fontSize: 72,
-          fontWeight: 800,
-          fontFamily: "Playfair Display, serif",
+          fontSize: 84,
+          fontFamily: 'Playfair Display, serif',
           marginBottom: 24,
-          textAlign: "center",
+          textAlign: 'center',
           lineHeight: 1.1,
           zIndex: 2,
+          color: '#c5a028',
         }}
       >
         {siteConfig.NAME}
@@ -108,12 +99,13 @@ export default async function OpenGraphImage() {
 
       <div
         style={{
-          fontSize: 32,
+          fontSize: 36,
           maxWidth: 900,
-          textAlign: "center",
-          opacity: 0.95,
+          textAlign: 'center',
+          opacity: 0.8,
           lineHeight: 1.4,
           zIndex: 2,
+          fontFamily: 'Playfair Display, serif',
         }}
       >
         {siteConfig.DESCRIPTION}
@@ -125,9 +117,9 @@ export default async function OpenGraphImage() {
         fontData.byteLength > 0
           ? [
               {
-                name: "Playfair Display",
+                name: 'Playfair Display',
                 data: fontData,
-                style: "normal",
+                style: 'normal',
                 weight: 400,
               },
             ]

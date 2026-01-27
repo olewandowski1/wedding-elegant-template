@@ -1,38 +1,44 @@
 export const siteConfig = {
-  NAME: 'Landing Template',
-  SLUG: 'landing-template',
-  HANDLE: '@landing_template',
-  LOCALE: 'en',
+  NAME: 'Marzena & Wojciech',
+  SLUG: 'marzena-wojciech-wedding',
+  HANDLE: '@marzena_wojciech',
+  LOCALE: 'pl',
   FIXED_THEME: 'light' as 'light' | 'dark' | null,
 
-  URL: 'https://landing-template.vercel.app/',
-  REPO_URL: 'https://github.com/olewandowski1/landing-template/',
+  URL: 'https://marzena-wojciech.vercel.app/',
+  REPO_URL: 'https://github.com/olewandowski1/marzena-wojciech-wedding/',
 
   OG_IMAGE_URL: '/og-image.svg',
 
   DESCRIPTION:
-    'A modern landing page starter built for speed, SEO, and conversions.',
-  SHORT_DESCRIPTION: 'Modern landing page starter for Next.js.',
+    'Zapraszamy na nasz ślub! 20 czerwca 2028, Gdańsk.',
+  SHORT_DESCRIPTION: 'Marzena & Wojciech - Strona Ślubna',
 
   AUTHORS: [
     {
-      NAME: 'Oliver',
-      URL: 'https://olewandowski1.vercel.app/',
-      TWITTER: '@oleelewandowski',
+      NAME: 'Marzena & Wojciech',
+      URL: '#',
+      TWITTER: '@marzena_wojciech',
     },
   ],
 
-  CREATOR: '@oleelewandowski',
+  CREATOR: '@marzena_wojciech',
 
   KEYWORDS: [
-    'Landing Template',
-    'Next.js',
-    'Landing Page',
-    'Marketing Site',
-    'SEO',
+    'Ślub',
+    'Wesele',
+    'Marzena i Wojciech',
+    'Gdańsk',
+    'RSVP',
   ],
 
-  NAV_ROUTES: [],
+  NAV_ROUTES: [
+    { name: 'Start', href: '#hero' },
+    { name: 'Nasza Historia', href: '#story' },
+    { name: 'Szczegóły', href: '#details' },
+    { name: 'Informacje', href: '#info' },
+    { name: 'RSVP', href: '#rsvp' },
+  ],
 } as const;
 
 export type SiteConfig = typeof siteConfig;
