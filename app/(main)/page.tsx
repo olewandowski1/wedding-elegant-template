@@ -1,5 +1,6 @@
 import { createHash, createHmac, timingSafeEqual } from 'crypto';
 import { cookies, headers } from 'next/headers';
+import { getTranslations } from 'next-intl/server';
 import { AccessGate } from '@/components/access-gate';
 import { Details } from '@/components/details';
 import { Footer } from '@/components/footer';
@@ -80,7 +81,7 @@ async function unlockAccess(
   _prevState: UnlockState,
   formData: FormData,
 ): Promise<UnlockState> {
-  'use server';
+  const t = await getTranslations('Errors');
 
   const isLimited = await isRateLimited();
 
@@ -88,9 +89,8 @@ async function unlockAccess(
     return {
       status: 'error',
       message: {
-        title: 'Zbyt Wiele Prób',
-        detail:
-          'Przekroczono limit prób. Odczekaj kilka minut i spróbuj ponownie.',
+        title: t('rateLimit.title'),
+        detail: t('rateLimit.detail'),
       },
     };
   }
@@ -105,9 +105,8 @@ async function unlockAccess(
     return {
       status: 'error',
       message: {
-        title: 'Brak Ustawionego Hasła',
-        detail:
-          'Hasło dostępu nie zostało skonfigurowane. Skontaktuj się z administratorem.',
+        title: t('missingPassword.title'),
+        detail: t('missingPassword.detail'),
       },
     };
   }
@@ -116,9 +115,8 @@ async function unlockAccess(
     return {
       status: 'error',
       message: {
-        title: 'Brak Sekretu Dostępu',
-        detail:
-          'Brakuje WEDDING_ACCESS_SECRET. Skontaktuj się z administratorem.',
+        title: t('missingSecret.title'),
+        detail: t('missingSecret.detail'),
       },
     };
   }
@@ -127,8 +125,8 @@ async function unlockAccess(
     return {
       status: 'error',
       message: {
-        title: 'Hasło Wymagane',
-        detail: 'Proszę wprowadzić hasło, aby uzyskać dostęp.',
+        title: t('passwordRequired.title'),
+        detail: t('passwordRequired.detail'),
       },
     };
   }
@@ -141,8 +139,8 @@ async function unlockAccess(
     return {
       status: 'error',
       message: {
-        title: 'Nieprawidłowe Hasło',
-        detail: 'Spróbuj ponownie lub skontaktuj się z administratorem.',
+        title: t('invalidPassword.title'),
+        detail: t('invalidPassword.detail'),
       },
     };
   }

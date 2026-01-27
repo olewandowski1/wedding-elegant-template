@@ -1,0 +1,138 @@
+{
+  "Hero": {
+    "invitation": "Zaproszenie na ślub",
+    "names": "Marzena & Wojciech",
+    "date": "20 Czerwca 2028 - Gdańsk",
+    "rsvp": "Potwierdź przybycie"
+  },
+  "AccessGate": {
+    "trigger": "Uzyskaj Dostęp",
+    "title": "Marzena & Wojciech",
+    "description": "To prywatne zaproszenie. Proszę wprowadzić hasło, aby uzyskać dostęp do strony.",
+    "passwordInfo": "Hasło zostało wysłane wraz z zaproszeniem.",
+    "passwordLabel": "Hasło",
+    "cancel": "Wróć",
+    "checking": "Sprawdzanie...",
+    "unlock": "Odblokuj"
+  },
+  "Details": {
+    "headerSubtitle": "Miejsce i Czas",
+    "headerTitle": "Uroczystość",
+    "ceremony": {
+      "title": "Ceremonia Zaślubin",
+      "location": "Bazylika Mariacka",
+      "description": "Najstarsza i najpiękniejsza świątynia w Gdańsku, gdzie złożymy naszą przysięgę."
+    },
+    "reception": {
+      "title": "Przyjęcie Weselne",
+      "location": "Dwór Artusa",
+      "description": "Zapraszamy na wspólną celebrację pełną muzyki, tańca i radości."
+    },
+    "getDirections": "Dojazd na miejsce"
+  },
+  "Footer": {
+    "names": "Marzena & Wojciech",
+    "location": "Gdańsk, Polska"
+  },
+  "InfoSection": {
+    "headerSubtitle": "Ważne Wskazówki",
+    "headerTitle": "Dla Gości",
+    "dressCode": {
+      "title": "Dress Code",
+      "description": "Będzie nam miło, jeśli tego dnia wybierzecie stroje eleganckie i formalne (Black Tie Optional)."
+    },
+    "gifts": {
+      "title": "Prezenty",
+      "description": "Zamiast kwiatów, prosimy o wsparcie wybranej przez nas fundacji lub wino do naszej wspólnej piwniczki."
+    },
+    "additionalInfo": {
+      "title": "Dodatkowe Informacje",
+      "description": "Dla gości spoza Trójmiasta przygotowaliśmy listę polecanych hoteli w pobliżu Dworca Artusa."
+    }
+  },
+  "Navigation": {
+    "home": "Start",
+    "story": "Nasza Historia",
+    "details": "Szczegóły",
+    "info": "Informacje",
+    "rsvp": "RSVP"
+  },
+  "RSVP": {
+    "headerSubtitle": "Bądźcie z Nami",
+    "headerTitle": "RSVP",
+    "deadline": "Będzie nam bardzo miło, jeśli potwierdzisz swoją obecność do dnia 20.04.2028.",
+    "footerText": "Nie możemy się doczekać spotkania z Wami!",
+    "success": {
+      "title": "DZIĘKUJEMY!",
+      "message1": "Twoje potwierdzenie zostało wysłane.",
+      "message2": "Do zobaczenia w Gdańsku!",
+      "resetButton": "Wypełnij ponownie"
+    },
+    "form": {
+      "fullNameLabel": "Imię i Nazwisko",
+      "fullNamePlaceholder": "np. Jan Kowalski",
+      "emailLabel": "Adres E-mail",
+      "emailPlaceholder": "np. jan@kowalski.pl",
+      "plusOneLabel": "Osoba Towarzysząca (opcjonalnie)",
+      "plusOnePlaceholder": "np. Anna Nowak",
+      "attendanceLabel": "Potwierdzenie obecności",
+      "attendanceYes": "Tak, z przyjemnością!",
+      "attendanceNo": "Niestety nie mogę...",
+      "messageLabel": "Twoja wiadomość (opcjonalnie)",
+      "messagePlaceholder": "Jeśli chcesz nam coś przekazać...",
+      "submitButton": "Wyślij Wiadomość",
+      "fullNameError": "Proszę podać imię i nazwisko.",
+      "emailError": "Proszę podać poprawny adres e-mail."
+    }
+  },
+  "Story": {
+    "headerSubtitle": "Nasza Wspólna Droga",
+    "headerTitle": "Nasza Historia",
+    "imageAlt1": "Marzena & Wojciech nad Motławą",
+    "quote": "Od pierwszego spotkania nad brzegiem Motławy, po wspólną drogę pełną pasji i marzeń...",
+    "historyParagraph1": "Wszystko zaczęło się od przypadkowego spotkania, które z czasem przerodziło się w najpiękniejszą przygodę naszego życia. Gdańsk, z jego historycznym urokiem i morską bryzą, stał się tłem dla naszych najważniejszych chwil.",
+    "historyParagraph2": "Dziś, bogatsi o setki wspólnych zachodów słońca i tysiące przegadanych godzin, stajemy u progu nowej drogi.",
+    "futureTitle": "Wspólna Przyszłość",
+    "futureParagraph1": "Zapraszamy Was do wspólnego świętowania dnia, w którym wypowiemy sakramentalne \"TAK\". To dla nas ogromny zaszczyt, że możemy dzielić tę radość właśnie z Wami — naszą rodziną i przyjaciółmi.",
+    "futureParagraph2": "To tutaj, w sercu pięknego Gdańska, chcemy rozpocząć kolejny rozdział naszej historii.",
+    "imageAlt2": "Wspólne chwile",
+    "sideLabel": "Gdańsk • 20 Czerwca 2028"
+  },
+  "LanguageSwitcher": {
+    "label": "Zmień język",
+    "pl": "Polski",
+    "en": "Angielski"
+  },
+  "Errors": {
+    "rateLimit": {
+      "title": "Zbyt Wiele Prób",
+      "detail": "Przekroczono limit prób. Odczekaj kilka minut i spróbuj ponownie."
+    },
+    "missingPassword": {
+      "title": "Brak Ustawionego Hasła",
+      "detail": "Hasło dostępu nie zostało skonfigurowane. Skontaktuj się z administratorem."
+    },
+    "missingSecret": {
+      "title": "Brak Sekretu Dostępu",
+      "detail": "Brakuje WEDDING_ACCESS_SECRET. Skontaktuj się z administratorem."
+    },
+    "passwordRequired": {
+      "title": "Hasło Wymagane",
+      "detail": "Proszę wprowadzić hasło, aby uzyskać dostęp."
+    },
+    "invalidPassword": {
+      "title": "Nieprawidłowe Hasło",
+      "detail": "Spróbuj ponownie lub skontaktuj się z administratorem."
+    }
+  },
+  "Metadata": {
+    "title": "Marzena & Wojciech - Strona Ślubna",
+    "description": "Bądźcie z nami, gdy powiemy sobie \"Tak\"! Serdecznie zapraszamy na ślub i wesele Marzeny i Wojciecha w malowniczym Gdańsku. Na tej stronie znajdziecie wszystkie szczegóły uroczystości, naszą wspólną historię oraz formularz potwierdzenia przybycia. Do zobaczenia!",
+    "invitation": "Zaproszenie"
+  },
+  "NotFound": {
+    "title": "Nie znaleziono strony",
+    "description": "Przepraszamy, ale strona, której szukasz, nie istnieje lub została przeniesiona. Wróć na stronę główną, aby kontynuować przeglądanie szczegółów naszego ślubu.",
+    "backHome": "Wróć do strony głównej"
+  }
+}

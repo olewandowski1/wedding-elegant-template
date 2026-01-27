@@ -2,8 +2,11 @@
 
 import { motion } from 'motion/react';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 export function Story() {
+  const t = useTranslations('Story');
+
   return (
     <section
       id='story'
@@ -35,10 +38,10 @@ export function Story() {
             transition={{ duration: 1 }}
           >
             <span className='mb-2 block font-handwritten text-3xl text-foreground/50 md:mb-4 md:text-4xl'>
-              Nasza Wspólna Droga
+              {t('headerSubtitle')}
             </span>
             <h2 className='font-serif text-3xl font-light uppercase tracking-[0.2em] text-foreground md:text-7xl'>
-              Nasza Historia
+              {t('headerTitle')}
             </h2>
             <div className='mt-8 flex justify-center'>
               <div className='h-[1px] w-24 bg-foreground/20' />
@@ -66,7 +69,7 @@ export function Story() {
                 >
                   <Image
                     src='/images/6.jpg'
-                    alt='Marzena & Wojciech nad Motławą'
+                    alt={t('imageAlt1')}
                     fill
                     className='object-cover transition-transform duration-[2s] group-hover:scale-110'
                   />
@@ -87,8 +90,7 @@ export function Story() {
             >
               <div className='relative'>
                 <p className='font-serif text-3xl italic leading-relaxed text-foreground/90 md:text-4xl'>
-                  "Od pierwszego spotkania nad brzegiem Motławy, po wspólną
-                  drogę pełną pasji i marzeń..."
+                  &ldquo;{t('quote')}&rdquo;
                 </p>
                 <div className='absolute -left-8 top-0 hidden font-serif text-8xl text-foreground/5 lg:block'>
                   &ldquo;
@@ -96,16 +98,8 @@ export function Story() {
               </div>
 
               <div className='space-y-6 font-serif text-lg leading-relaxed text-foreground/70'>
-                <p>
-                  Wszystko zaczęło się od przypadkowego spotkania, które z
-                  czasem przerodziło się w najpiękniejszą przygodę naszego
-                  życia. Gdańsk, z jego historycznym urokiem i morską bryzą,
-                  stał się tłem dla naszych najważniejszych chwil.
-                </p>
-                <p>
-                  Dziś, bogatsi o setki wspólnych zachodów słońca i tysiące
-                  przegadanych godzin, stajemy u progu nowej drogi.
-                </p>
+                <p>{t('historyParagraph1')}</p>
+                <p>{t('historyParagraph2')}</p>
               </div>
             </motion.div>
           </div>
@@ -122,20 +116,12 @@ export function Story() {
               className='space-y-8 text-center lg:text-left'
             >
               <h3 className='font-serif text-3xl font-light uppercase tracking-widest text-foreground'>
-                Wspólna Przyszłość
+                {t('futureTitle')}
               </h3>
               <div className='mx-auto h-[1px] w-12 bg-foreground/30 lg:mx-0' />
               <div className='space-y-6 font-serif text-lg leading-relaxed text-foreground/70'>
-                <p>
-                  Zapraszamy Was do wspólnego świętowania dnia, w którym
-                  wypowiemy sakramentalne "TAK". To dla nas ogromny zaszczyt, że
-                  możemy dzielić tę radość właśnie z Wami — naszą rodziną i
-                  przyjaciółmi.
-                </p>
-                <p>
-                  To tutaj, w sercu pięknego Gdańska, chcemy rozpocząć kolejny
-                  rozdział naszej historii.
-                </p>
+                <p>{t('futureParagraph1')}</p>
+                <p>{t('futureParagraph2')}</p>
               </div>
             </motion.div>
           </div>
@@ -157,7 +143,7 @@ export function Story() {
                 >
                   <Image
                     src='/images/1.jpg'
-                    alt='Wspólne chwile'
+                    alt={t('imageAlt2')}
                     fill
                     className='object-cover transition-transform duration-[2s] group-hover:scale-110'
                   />
@@ -174,7 +160,7 @@ export function Story() {
       {/* Side Label Decor */}
       <div className='absolute right-0 top-1/2 -translate-y-1/2 rotate-90 translate-x-[calc(50%-2rem)] hidden lg:block'>
         <span className='text-[10px] font-sans uppercase tracking-[1em] text-foreground/10 whitespace-nowrap'>
-          Gdańsk • 20 Czerwca 2028
+          {t('sideLabel')}
         </span>
       </div>
 

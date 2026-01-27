@@ -2,8 +2,15 @@
 
 import { siteConfig } from '@/config/site';
 import { motion } from 'motion/react';
+import { useTranslations } from 'next-intl';
 
 export function Footer() {
+  const t = useTranslations('Footer');
+
+  const names = siteConfig.NAME.split('&').map((s) => s.trim());
+  const initial1 = names[0]?.[0] || 'M';
+  const initial2 = names[1]?.[0] || 'W';
+
   return (
     <footer className='relative overflow-hidden bg-background pt-32 md:pt-48'>
       {/* Subtle Background Decor */}
@@ -31,11 +38,10 @@ export function Footer() {
           {/* Logo / Signature */}
           <div className='mb-16'>
             <span className='mb-[-0.6em] block font-handwritten text-7xl text-foreground/15 md:text-8xl'>
-              M&W
+              {initial1}&{initial2}
             </span>
             <h2 className='font-serif text-3xl font-light uppercase tracking-[0.4em] text-foreground md:text-4xl'>
-              Marzena <span className='text-foreground/50 italic'>&</span>{' '}
-              Wojciech
+              {t('names')}
             </h2>
           </div>
 
@@ -44,7 +50,7 @@ export function Footer() {
             <div className='flex items-center justify-center space-x-6'>
               <div className='h-[1px] w-12 bg-foreground/20' />
               <p className='text-[10px] font-bold uppercase tracking-[0.5em] text-foreground/60'>
-                Gdańsk, Polska
+                {t('location')}
               </p>
               <div className='h-[0.5px] w-12 bg-foreground/20' />
             </div>

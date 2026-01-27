@@ -3,10 +3,20 @@
 import { siteConfig } from '@/config/site';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion, useScroll } from 'motion/react';
+import { useTranslations } from 'next-intl';
+import { LanguageSwitcher } from './language-switcher';
 import Link from 'next/link';
 import * as React from 'react';
 
 export function Navigation() {
+  const t = useTranslations('Navigation');
+  const navRoutes = [
+    { name: t('home'), href: '#hero' },
+    { name: t('story'), href: '#story' },
+    { name: t('details'), href: '#details' },
+    { name: t('info'), href: '#info' },
+    { name: t('rsvp'), href: '#rsvp' },
+  ];
   const [isOpen, setIsOpen] = React.useState(false);
   const [activeSection, setActiveSection] = React.useState('hero');
   const [scrolled, setScrolled] = React.useState(false);
@@ -128,13 +138,10 @@ export function Navigation() {
             : 'bg-transparent py-6 sm:py-10 md:py-16.5',
       )}
     >
-      <div className='container mx-auto flex items-center justify-between sm:justify-center px-6 md:px-12'>
-        {/* Mobile-only spacing fix */}
-        <div className='flex-1 md:hidden' />
-
-        {/* Desktop Nav - Centered & Refined */}
-        <div className='hidden items-center space-x-12 lg:space-x-16 lg:flex'>
-          {siteConfig.NAV_ROUTES.map((route) => {
+      <div className='container mx-auto flex items-center justify-between px-6 md:px-12'>
+        {/* Desktop Nav - Left */}
+        <div className='hidden items-center lg:flex space-x-12 lg:space-x-16'>
+          {navRoutes.map((route) => {
             const isActive = activeSection === route.href.replace('#', '');
             return (
               <Link
@@ -157,7 +164,7 @@ export function Navigation() {
                   <motion.span
                     layoutId='activeNav'
                     className={cn(
-                      'absolute -bottom-2 left-0 h-[1px] w-full',
+                      'absolute -bottom-2 left-0 h-px w-full',
                       scrolled ? 'bg-foreground' : 'bg-white',
                     )}
                     transition={{ type: 'spring', stiffness: 380, damping: 30 }}
@@ -168,40 +175,51 @@ export function Navigation() {
           })}
         </div>
 
-        {/* Mobile menu button - Positioned right with flex-1 for balance */}
-        <div className='flex flex-1 justify-end lg:hidden'>
-          <button
-            type='button'
-            className='relative z-50 p-2'
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label='Toggle menu'
-            aria-expanded={isOpen}
-            aria-controls='mobile-nav'
+        {/* Right side - Language Switcher (Desktop) and Mobile button */}
+        <div className='flex items-center gap-8'>
+          <div
+            className={cn(
+              'hidden lg:block transition-colors duration-500',
+              scrolled ? 'border-foreground/10' : 'border-white/10',
+            )}
           >
-            <div className='flex flex-col space-y-1.5'>
-              <span
-                className={cn(
-                  'h-[1px] w-6 transition-all',
-                  scrolled || isOpen ? 'bg-foreground' : 'bg-white',
-                  isOpen && 'translate-y-2 rotate-45',
-                )}
-              />
-              <span
-                className={cn(
-                  'h-[1px] w-6 transition-all',
-                  scrolled || isOpen ? 'bg-foreground' : 'bg-white',
-                  isOpen && 'opacity-0',
-                )}
-              />
-              <span
-                className={cn(
-                  'h-[1px] w-6 transition-all',
-                  scrolled || isOpen ? 'bg-foreground' : 'bg-white',
-                  isOpen && '-translate-y-2 -rotate-45',
-                )}
-              />
-            </div>
-          </button>
+            <LanguageSwitcher scrolled={scrolled} />
+          </div>
+
+          <div className='lg:hidden'>
+            <button
+              type='button'
+              className='relative z-50 p-2'
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label='Toggle menu'
+              aria-expanded={isOpen}
+              aria-controls='mobile-nav'
+            >
+              <div className='flex flex-col space-y-1.5'>
+                <span
+                  className={cn(
+                    'h-px w-6 transition-all',
+                    scrolled || isOpen ? 'bg-foreground' : 'bg-white',
+                    isOpen && 'translate-y-2 rotate-45',
+                  )}
+                />
+                <span
+                  className={cn(
+                    'h-px w-6 transition-all',
+                    scrolled || isOpen ? 'bg-foreground' : 'bg-white',
+                    isOpen && 'opacity-0',
+                  )}
+                />
+                <span
+                  className={cn(
+                    'h-px w-6 transition-all',
+                    scrolled || isOpen ? 'bg-foreground' : 'bg-white',
+                    isOpen && '-translate-y-2 -rotate-45',
+                  )}
+                />
+              </div>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -225,7 +243,7 @@ export function Navigation() {
               transition={{ duration: 0.2, ease: 'easeOut' }}
             >
               <div className='flex flex-col gap-4 px-6 py-8'>
-                {siteConfig.NAV_ROUTES.map((route, index) => (
+                {navRoutes.map((route, index) => (
                   <Link
                     key={route.href}
                     href={route.href}
@@ -238,6 +256,10 @@ export function Navigation() {
                     </span>
                   </Link>
                 ))}
+
+                <div className='mt-12 flex justify-center pt-12 border-t border-foreground/5'>
+                  <LanguageSwitcher scrolled={true} />
+                </div>
               </div>
             </motion.div>
           </>

@@ -2,29 +2,29 @@
 
 import { Gift, Info, Shirt } from 'lucide-react';
 import { motion } from 'motion/react';
-
-const infoItems = [
-  {
-    icon: Shirt,
-    title: 'Dress Code',
-    description:
-      'Będzie nam miło, jeśli tego dnia wybierzecie stroje eleganckie i formalne (Black Tie Optional).',
-  },
-  {
-    icon: Gift,
-    title: 'Prezenty',
-    description:
-      'Zamiast kwiatów, prosimy o wsparcie wybranej przez nas fundacji lub wino do naszej wspólnej piwniczki.',
-  },
-  {
-    icon: Info,
-    title: 'Dodatkowe Informacje',
-    description:
-      'Dla gości spoza Trójmiasta przygotowaliśmy listę polecanych hoteli w pobliżu Dworca Artusa.',
-  },
-];
+import { useTranslations } from 'next-intl';
 
 export function InfoSection() {
+  const t = useTranslations('InfoSection');
+
+  const infoItems = [
+    {
+      icon: Shirt,
+      title: t('dressCode.title'),
+      description: t('dressCode.description'),
+    },
+    {
+      icon: Gift,
+      title: t('gifts.title'),
+      description: t('gifts.description'),
+    },
+    {
+      icon: Info,
+      title: t('additionalInfo.title'),
+      description: t('additionalInfo.description'),
+    },
+  ];
+
   return (
     <section
       id='info'
@@ -56,10 +56,10 @@ export function InfoSection() {
           className='mb-16 text-center md:mb-24'
         >
           <span className='mb-2 block font-handwritten text-3xl text-foreground/50 md:mb-4 md:text-4xl'>
-            Ważne Wskazówki
+            {t('headerSubtitle')}
           </span>
           <h2 className='font-serif text-3xl font-light uppercase tracking-[0.2em] text-foreground md:text-7xl'>
-            Dla Gości
+            {t('headerTitle')}
           </h2>
           <div className='mt-8 flex justify-center'>
             <div className='h-[1px] w-24 bg-foreground/20' />

@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent } from '@/components/ui/card';
+import { useTranslations } from 'next-intl';
 import {
   Field,
   FieldLabel,
@@ -18,19 +19,25 @@ import {
   FieldGroup,
 } from '@/components/ui/field';
 
-const formSchema = z.object({
-  fullName: z.string().min(2, {
-    message: 'Proszę podać imię i nazwisko.',
-  }),
-  email: z.string().email({
-    message: 'Proszę podać poprawny adres e-mail.',
-  }),
-  plusOne: z.string().optional(),
-  attendance: z.enum(['yes', 'no']),
-  message: z.string().optional(),
-});
-
 export function RSVP() {
+  const t = useTranslations('RSVP');
+
+  const formSchema = React.useMemo(
+    () =>
+      z.object({
+        fullName: z.string().min(2, {
+          message: t('form.fullNameError'),
+        }),
+        email: z.string().email({
+          message: t('form.emailError'),
+        }),
+        plusOne: z.string().optional(),
+        attendance: z.enum(['yes', 'no']),
+        message: z.string().optional(),
+      }),
+    [t],
+  );
+
   const [isSubmitted, setIsSubmitted] = React.useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -80,17 +87,16 @@ export function RSVP() {
           className='mb-12 text-center md:mb-20'
         >
           <span className='mb-2 block font-handwritten text-3xl text-foreground/50 md:mb-4 md:text-4xl'>
-            Bądźcie z Nami
+            {t('headerSubtitle')}
           </span>
           <h2 className='font-serif text-3xl font-light uppercase tracking-[0.2em] text-foreground md:text-7xl'>
-            RSVP
+            {t('headerTitle')}
           </h2>
           <div className='mt-8 flex justify-center'>
             <div className='h-[1px] w-24 bg-foreground/20' />
           </div>
           <p className='mt-12 font-serif text-lg italic text-foreground/70 md:text-xl'>
-            Będzie nam bardzo miło, jeśli potwierdzisz swoją obecność do dnia
-            20.04.2028.
+            {t('deadline')}
           </p>
         </motion.div>
 
@@ -137,12 +143,12 @@ export function RSVP() {
                   </div>
                   <div className='space-y-4'>
                     <h3 className='font-serif text-4xl font-light tracking-widest text-foreground'>
-                      DZIĘKUJEMY!
+                      {t('success.title')}
                     </h3>
                     <p className='font-serif text-xl italic text-foreground/70'>
-                      Twoje potwierdzenie zostało wysłane.
+                      {t('success.message1')}
                       <br />
-                      Do zobaczenia w Gdańsku!
+                      {t('success.message2')}
                     </p>
                   </div>
                   <Button
@@ -150,7 +156,7 @@ export function RSVP() {
                     onClick={() => setIsSubmitted(false)}
                     className='rounded-none border-foreground/20 font-serif text-xs uppercase tracking-[0.3em] hover:bg-foreground hover:text-background transition-all duration-500'
                   >
-                    Wypełnij ponownie
+                    {t('success.resetButton')}
                   </Button>
                 </motion.div>
               ) : (
@@ -166,10 +172,10 @@ export function RSVP() {
                         render={({ field, fieldState }) => (
                           <Field data-invalid={fieldState.invalid}>
                             <FieldLabel className='text-left text-[10px] uppercase tracking-[0.3em] text-foreground/40 font-bold'>
-                              Imię i Nazwisko
+                              {t('form.fullNameLabel')}
                             </FieldLabel>
                             <Input
-                              placeholder='np. Jan Kowalski'
+                              placeholder={t('form.fullNamePlaceholder')}
                               {...field}
                               className='text-left rounded-none border-0 border-b border-foreground/10 bg-transparent px-0 focus-visible:border-foreground focus-visible:ring-0 transition-colors h-12 text-lg font-serif shadow-none'
                             />
@@ -186,11 +192,11 @@ export function RSVP() {
                         render={({ field, fieldState }) => (
                           <Field data-invalid={fieldState.invalid}>
                             <FieldLabel className='text-left text-[10px] uppercase tracking-[0.3em] text-foreground/40 font-bold'>
-                              Adres E-mail
+                              {t('form.emailLabel')}
                             </FieldLabel>
                             <Input
                               type='email'
-                              placeholder='np. jan@kowalski.pl'
+                              placeholder={t('form.emailPlaceholder')}
                               {...field}
                               className='text-left rounded-none border-0 border-b border-foreground/10 bg-transparent px-0 focus-visible:border-foreground focus-visible:ring-0 transition-colors h-12 text-lg font-serif shadow-none'
                             />
@@ -209,7 +215,7 @@ export function RSVP() {
                         render={({ field, fieldState }) => (
                           <Field data-invalid={fieldState.invalid}>
                             <FieldLabel className='text-left text-[10px] uppercase tracking-[0.3em] text-foreground/40 font-bold'>
-                              Potwierdzenie obecności
+                              {t('form.attendanceLabel')}
                             </FieldLabel>
                             <div className='flex flex-col items-start space-y-4 pt-4'>
                               <button
@@ -249,7 +255,7 @@ export function RSVP() {
                                       : 'text-muted-foreground group-hover:text-foreground/60',
                                   )}
                                 >
-                                  Tak, z przyjemnością!
+                                  {t('form.attendanceYes')}
                                 </span>
                               </button>
 
@@ -290,7 +296,7 @@ export function RSVP() {
                                       : 'text-muted-foreground group-hover:text-foreground/60',
                                   )}
                                 >
-                                  Niestety nie mogę...
+                                  {t('form.attendanceNo')}
                                 </span>
                               </button>
                             </div>
@@ -307,10 +313,10 @@ export function RSVP() {
                         render={({ field, fieldState }) => (
                           <Field data-invalid={fieldState.invalid}>
                             <FieldLabel className='text-left text-[10px] uppercase tracking-[0.3em] text-foreground/40 font-bold'>
-                              Osoba Towarzysząca (opcjonalnie)
+                              {t('form.plusOneLabel')}
                             </FieldLabel>
                             <Input
-                              placeholder='np. Anna Nowak'
+                              placeholder={t('form.plusOnePlaceholder')}
                               {...field}
                               className='h-12 text-left rounded-none border-0 border-b border-foreground/10 bg-transparent px-0 font-serif text-lg shadow-none transition-colors focus-visible:border-foreground focus-visible:ring-0 md:mt-11'
                             />
@@ -328,10 +334,10 @@ export function RSVP() {
                       render={({ field, fieldState }) => (
                         <Field data-invalid={fieldState.invalid}>
                           <FieldLabel className='text-left text-[10px] uppercase tracking-[0.3em] text-foreground/40 font-bold'>
-                            Twoja wiadomość (opcjonalnie)
+                            {t('form.messageLabel')}
                           </FieldLabel>
                           <Textarea
-                            placeholder='Jeśli chcesz nam coś przekazać...'
+                            placeholder={t('form.messagePlaceholder')}
                             className='text-left min-h-[100px] rounded-none border-0 border-b border-foreground/10 bg-transparent px-0 focus-visible:border-foreground focus-visible:ring-0 transition-colors text-lg font-serif resize-none shadow-none'
                             {...field}
                           />
@@ -348,7 +354,7 @@ export function RSVP() {
                       type='submit'
                       className='group relative overflow-hidden rounded-none border border-foreground bg-foreground px-12 py-8 text-xs font-bold uppercase tracking-[0.1em] text-background transition-all hover:bg-transparent hover:text-foreground'
                     >
-                      Wyślij Wiadomość
+                      {t('form.submitButton')}
                     </Button>
                   </div>
                 </form>
@@ -360,7 +366,7 @@ export function RSVP() {
         {/* Closing Label Decor */}
         <div className='mt-20 text-center'>
           <p className='font-handwritten text-4xl text-foreground/20'>
-            Nie możemy się doczekać spotkania z Wami!
+            {t('footerText')}
           </p>
         </div>
       </div>

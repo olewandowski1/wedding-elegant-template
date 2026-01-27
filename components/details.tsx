@@ -4,31 +4,32 @@ import Image from 'next/image';
 import { motion } from 'motion/react';
 import { cn } from '@/lib/utils';
 import { Church, Wine, MapPin, Clock } from 'lucide-react';
-
-const events = [
-  {
-    title: 'Ceremonia Zaślubin',
-    time: '16:00',
-    location: 'Bazylika Mariacka',
-    address: 'Podkramarska 5, 80-834 Gdańsk',
-    description:
-      'Najstarsza i najpiękniejsza świątynia w Gdańsku, gdzie złożymy naszą przysięgę.',
-    image: '/images/4.jpg',
-    icon: Church,
-  },
-  {
-    title: 'Przyjęcie Weselne',
-    time: '18:00',
-    location: 'Dwór Artusa',
-    address: 'Długi Targ 43-44, 80-831 Gdańsk',
-    description:
-      'Zapraszamy na wspólną celebrację pełną muzyki, tańca i radości.',
-    image: '/images/5.jpg',
-    icon: Wine,
-  },
-];
+import { useTranslations } from 'next-intl';
 
 export function Details() {
+  const t = useTranslations('Details');
+
+  const events = [
+    {
+      title: t('ceremony.title'),
+      time: '16:00',
+      location: t('ceremony.location'),
+      address: 'Podkramarska 5, 80-834 Gdańsk',
+      description: t('ceremony.description'),
+      image: '/images/4.jpg',
+      icon: Church,
+    },
+    {
+      title: t('reception.title'),
+      time: '18:00',
+      location: t('reception.location'),
+      address: 'Długi Targ 43-44, 80-831 Gdańsk',
+      description: t('reception.description'),
+      image: '/images/5.jpg',
+      icon: Wine,
+    },
+  ];
+
   return (
     <section
       id='details'
@@ -47,10 +48,10 @@ export function Details() {
           className='mb-16 text-center md:mb-24'
         >
           <span className='mb-2 block font-handwritten text-3xl text-foreground/50 md:mb-4 md:text-4xl'>
-            Miejsce i Czas
+            {t('headerSubtitle')}
           </span>
           <h2 className='font-serif text-3xl font-light uppercase tracking-[0.2em] text-foreground md:text-7xl'>
-            Uroczystość
+            {t('headerTitle')}
           </h2>
           <div className='mt-8 flex justify-center'>
             <div className='h-[1px] w-24 bg-foreground/20' />
@@ -166,7 +167,7 @@ export function Details() {
                       className='group flex items-center space-x-4 text-[10px] font-bold uppercase tracking-[0.4em] text-foreground transition-colors hover:text-foreground/60'
                     >
                       <span className='border-b border-foreground/20 pb-1'>
-                        Dojazd na miejsce
+                        {t('getDirections')}
                       </span>
                       <motion.div
                         animate={{ x: [0, 5, 0] }}

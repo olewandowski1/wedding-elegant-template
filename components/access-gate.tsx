@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useActionState, useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import {
@@ -37,6 +38,7 @@ type AccessGateProps = {
 };
 
 export function AccessGate({ unlockAction }: AccessGateProps) {
+  const t = useTranslations('AccessGate');
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const [state, formAction, isPending] = useActionState(unlockAction, {
@@ -61,7 +63,7 @@ export function AccessGate({ unlockAction }: AccessGateProps) {
           size='lg'
           className='bg-transparent text-white border-white hover:bg-white hover:text-black rounded-none px-12 py-6 text-sm tracking-wide uppercase transition-all duration-500'
         >
-          Uzyskaj Dostęp
+          {t('trigger')}
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent className='bg-background/95 border-border/60 ring-1 ring-black/5 shadow-2xl p-6 sm:p-8 max-w-md gap-6'>
@@ -69,22 +71,19 @@ export function AccessGate({ unlockAction }: AccessGateProps) {
           <AlertDialogHeader className='gap-3'>
             <AlertDialogTitle className='flex flex-col items-start gap-2 text-left'>
               <p className='font-handwritten text-3xl sm:text-4xl text-foreground/90'>
-                Marzena & Wojciech
+                {t('title')}
               </p>
               <div className='h-px w-24 bg-foreground/20' />
             </AlertDialogTitle>
             <AlertDialogDescription className='text-sm text-foreground/70 text-left'>
-              To prywatne zaproszenie. Proszę wprowadzić hasło, aby uzyskać
-              dostęp do strony.{' '}
-              <span className='font-semibold'>
-                Hasło zostało wysłane wraz z zaproszeniem.
-              </span>
+              {t('description')}{' '}
+              <span className='font-semibold'>{t('passwordInfo')}</span>
             </AlertDialogDescription>
           </AlertDialogHeader>
 
           <div className='grid gap-3'>
             <Label htmlFor='access-key' className='text-sm font-medium'>
-              Hasło
+              {t('passwordLabel')}
             </Label>
             <Input
               id='access-key'
@@ -104,10 +103,10 @@ export function AccessGate({ unlockAction }: AccessGateProps) {
 
           <AlertDialogFooter className='gap-3'>
             <AlertDialogCancel size='lg' disabled={isPending}>
-              Wróć
+              {t('cancel')}
             </AlertDialogCancel>
             <Button type='submit' size='lg' disabled={isPending}>
-              {isPending ? 'Sprawdzanie...' : 'Odblokuj'}
+              {isPending ? t('checking') : t('unlock')}
             </Button>
           </AlertDialogFooter>
         </form>

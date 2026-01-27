@@ -3,6 +3,7 @@
 import type { ReactNode } from 'react';
 import { motion } from 'motion/react';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 
 type HeroProps = {
@@ -11,6 +12,8 @@ type HeroProps = {
 };
 
 export function Hero({ locked = false, cta }: HeroProps) {
+  const t = useTranslations('Hero');
+
   return (
     <section
       id='hero'
@@ -53,14 +56,14 @@ export function Hero({ locked = false, cta }: HeroProps) {
                 className='mb-4 sm:mb-8'
               >
                 <p className='font-serif text-sm sm:text-lg md:text-xl tracking-[0.4em] sm:tracking-[0.5em] text-white uppercase'>
-                  Zaproszenie na ślub
+                  {t('invitation')}
                 </p>
               </motion.div>
             ) : null}
 
             <h1 className='select-none font-handwritten relative'>
               <span className='text-4xl sm:text-5xl md:text-6xl lg:text-8xl leading-[0.8] text-white block drop-shadow-md'>
-                Marzena & Wojciech
+                {t('names')}
               </span>
             </h1>
 
@@ -72,7 +75,7 @@ export function Hero({ locked = false, cta }: HeroProps) {
             >
               <div className='h-px w-16 sm:w-24 bg-white/60' />
               <p className='font-serif text-xl sm:text-3xl md:text-5xl tracking-[0.2em] text-white italic'>
-                20 Czerwca 2028 - Gdańsk
+                {t('date')}
               </p>
               <div className='h-px w-16 sm:w-24 bg-white/60' />
             </motion.div>
@@ -96,7 +99,7 @@ export function Hero({ locked = false, cta }: HeroProps) {
                       ?.scrollIntoView({ behavior: 'smooth' })
                   }
                 >
-                  Potwierdź przybycie
+                  {t('rsvp')}
                 </Button>
               )}
             </motion.div>

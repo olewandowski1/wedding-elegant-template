@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
 import { siteConfig } from '@/config/site';
+import { getTranslations } from 'next-intl/server';
 
 export const alt = `${siteConfig.NAME} — ${siteConfig.SHORT_DESCRIPTION}`;
 
@@ -48,6 +49,7 @@ function WeddingLogo() {
 }
 
 export default async function OpenGraphImage() {
+  const t = await getTranslations('Metadata');
   let fontData: Buffer | ArrayBuffer;
 
   try {
@@ -169,7 +171,7 @@ export default async function OpenGraphImage() {
           zIndex: 2,
         }}
       >
-        Zaproszenie
+        {t('invitation')}
       </div>
 
       <div
@@ -211,7 +213,7 @@ export default async function OpenGraphImage() {
           color: '#444',
         }}
       >
-        {siteConfig.DESCRIPTION}
+        {t('description')}
       </div>
     </div>,
     {
