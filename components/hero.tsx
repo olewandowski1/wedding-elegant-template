@@ -1,10 +1,16 @@
 'use client';
 
+import type { ReactNode } from 'react';
 import { motion } from 'motion/react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 
-export function Hero() {
+type HeroProps = {
+  locked?: boolean;
+  cta?: ReactNode;
+};
+
+export function Hero({ locked = false, cta }: HeroProps) {
   return (
     <section
       id='hero'
@@ -39,16 +45,18 @@ export function Hero() {
             transition={{ delay: 0.5, duration: 1.5, ease: 'easeOut' }}
             className='flex flex-col items-center'
           >
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1, duration: 1 }}
-              className='mb-4 sm:mb-8'
-            >
-              <p className='font-serif text-sm sm:text-lg md:text-xl tracking-[0.4em] sm:tracking-[0.5em] text-white/90 uppercase'>
-                Zaproszenie na ślub
-              </p>
-            </motion.div>
+            {!locked ? (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1, duration: 1 }}
+                className='mb-4 sm:mb-8'
+              >
+                <p className='font-serif text-sm sm:text-lg md:text-xl tracking-[0.4em] sm:tracking-[0.5em] text-white/90 uppercase'>
+                  Zaproszenie na ślub
+                </p>
+              </motion.div>
+            ) : null}
 
             <h1 className='select-none font-handwritten relative'>
               <span className='text-4xl sm:text-5xl md:text-6xl lg:text-8xl leading-[0.8] text-white block drop-shadow-sm'>
@@ -62,11 +70,11 @@ export function Hero() {
               transition={{ delay: 1.5, duration: 1 }}
               className='mt-8 sm:mt-12 flex flex-col items-center gap-4'
             >
-              <div className='h-[1px] w-16 sm:w-24 bg-white/40' />
+              <div className='h-px w-16 sm:w-24 bg-white/40' />
               <p className='font-serif text-xl sm:text-3xl md:text-5xl tracking-[0.2em] text-white italic'>
-                20 Czerwca 2028 — Gdańsk
+                20 Czerwca 2028 - Gdańsk
               </p>
-              <div className='h-[1px] w-16 sm:w-24 bg-white/40' />
+              <div className='h-px w-16 sm:w-24 bg-white/40' />
             </motion.div>
 
             <motion.div
@@ -75,38 +83,44 @@ export function Hero() {
               transition={{ delay: 2, duration: 1 }}
               className='mt-16'
             >
-              <Button
-                variant='outline'
-                size='lg'
-                className='bg-transparent text-white border-white hover:bg-white hover:text-black rounded-none px-12 py-6 text-sm tracking-wide uppercase transition-all duration-500'
-                onClick={() =>
-                  document
-                    .getElementById('rsvp')
-                    ?.scrollIntoView({ behavior: 'smooth' })
-                }
-              >
-                Potwierdź przybycie
-              </Button>
+              {cta ? (
+                cta
+              ) : (
+                <Button
+                  variant='outline'
+                  size='lg'
+                  className='bg-transparent text-white border-white hover:bg-white hover:text-black rounded-none px-12 py-6 text-sm tracking-wide uppercase transition-all duration-500'
+                  onClick={() =>
+                    document
+                      .getElementById('rsvp')
+                      ?.scrollIntoView({ behavior: 'smooth' })
+                  }
+                >
+                  Potwierdź przybycie
+                </Button>
+              )}
             </motion.div>
           </motion.div>
         </div>
       </div>
 
       {/* Pulsing scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 3, duration: 1 }}
-        className='absolute bottom-12 left-1/2 -translate-x-1/2'
-      >
-        <div className='flex flex-col items-center gap-4'>
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-            className='w-[1px] h-12 bg-gradient-to-b from-white via-white/50 to-transparent'
-          />
-        </div>
-      </motion.div>
+      {!locked ? (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 3, duration: 1 }}
+          className='absolute bottom-12 left-1/2 -translate-x-1/2'
+        >
+          <div className='flex flex-col items-center gap-4'>
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+              className='w-px h-12 bg-linear-to-b from-white via-white/50 to-transparent'
+            />
+          </div>
+        </motion.div>
+      ) : null}
     </section>
   );
 }

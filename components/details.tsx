@@ -162,6 +162,7 @@ export function Details() {
                       whileHover={{ x: 10 }}
                       href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.address)}`}
                       target='_blank'
+                      rel='noopener noreferrer'
                       className='group flex items-center space-x-4 text-[10px] font-bold uppercase tracking-[0.4em] text-foreground transition-colors hover:text-foreground/60'
                     >
                       <span className='border-b border-foreground/20 pb-1'>
