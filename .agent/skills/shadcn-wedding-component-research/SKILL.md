@@ -129,7 +129,7 @@ The `IMPLEMENTATION-PLAN.md` file MUST include the following sections:
 ### 1. Global Architecture Notes
 
 - Semantic HTML structure (`header`, `main`, `section`, `footer`)
-- Privacy and access considerations
+- Privacy and access considerations (including QR-Pass-Through tokens)
 - Theme and vibe alignment
 - Motion usage strategy (restraint encouraged)
 
@@ -142,7 +142,9 @@ The `IMPLEMENTATION-PLAN.md` file MUST include the following sections:
   - Photography
   - Illustration
   - Decorative
-- Aspect ratio guidance
+- **Aspect ratio guidance:**
+  - Hero: Full-bleed or 16:9
+  - Content: 4:5 Portrait or 1:1 Square (preferred for elegance)
 - Priority assets (above-the-fold)
 - Notes on asset sensitivity (e.g. personal photos)
 
@@ -160,6 +162,11 @@ For EACH section defined in `REQUIREMENTS.md`, include:
 
 - What this section communicates to wedding guests
 
+**Navigation ID (MANDATORY)**
+
+- Unique kebab-case ID (e.g., `our-story`, `ceremony`)
+- MUST match `siteConfig.NAV_ROUTES` if applicable
+
 **Chosen Source**
 
 - shadcn/ui
@@ -175,6 +182,11 @@ For EACH section defined in `REQUIREMENTS.md`, include:
 - Grid or flex strategy
 - Content alignment and spacing
 - Responsive behavior (mobile-first)
+
+**Submission Logic (For RSVP only)**
+
+- Destination (e.g., Mock, Email via Resend, DB via Server Action)
+- Validation rules (must include name and attendance)
 
 **Assets Required**
 

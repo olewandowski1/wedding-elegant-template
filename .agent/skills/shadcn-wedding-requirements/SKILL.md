@@ -176,7 +176,7 @@ Persistent elements (if access allows):
 
 - **Static content:**
   - Couple story
-  - Ceremony and reception details
+  - Ceremony and reception details (times, address, parking, maps)
   - Venue information
   - Dress code
   - Gifts or “no gifts” preferences
@@ -210,18 +210,15 @@ Privacy is a **first-class design decision**, not an implementation detail.
 
 #### Supported Privacy Variants
 
-- **Public (Link‑Only)**
-  - Accessible via shared link
-  - Not intended for public discovery
-- **Private (Restricted Access)**
-  - Intended only for invited guests
-  - Access intent may include:
-    - Password
-    - Invitation-specific link
-    - QR code distribution
-- **Hybrid**
-  - Public announcement
-  - Restricted access to sensitive details
+- **Public**
+  - Accessible to anyone with the link.
+  - Used for public announcements or open invitations.
+  - Recommended: Still use `noindex` to avoid search engine discovery.
+- **Private (Password & QR Protected)**
+  - Restricted to invited guests only.
+  - Requires a shared password entry via an `AccessGate`.
+  - **QR Bypass**: Scanning a dedicated QR code with a token in the URL automatically unlocks the site without manual password entry.
+  - Includes mandatory rate-limiting on attempts.
 
 #### Assumptions
 
@@ -239,8 +236,7 @@ Wedding websites are **invitational by nature**.
   - Not intended for search engine discovery
 - Visibility intent must be explicitly confirmed:
   - Public
-  - Private
-  - Hybrid
+  - Private (Protected)
 - Indexing:
   - Disabled by default
   - Enabled only by explicit request

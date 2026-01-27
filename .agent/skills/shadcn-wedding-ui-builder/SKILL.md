@@ -49,7 +49,19 @@ Before writing any code, the builder MUST:
 - TypeScript
 - shadcn/ui
 - Tailwind CSS
-- Motion
+- Motion (`motion/react` mandated)
+- Forms (`react-hook-form` + `zod` mandated for RSVP)
+
+---
+
+## Privacy & Access Implementation (MANDATORY)
+
+- **Access Protection**: If the plan requires **Private (Password & QR Protected)** access, the builder MUST:
+  - Implement a `cookies`-based access gate in the root layout or main page.
+  - Use a Server Action for password verification.
+  - Implement rate limiting (see existing patterns in `app/(main)/page.tsx`).
+  - **QR Bypass**: Support auto-unlocking if a valid `accessKey` or `token` is passed as a query parameter. The builder MUST check for this parameter server-side and set the access cookie automatically to avoid the manual password entry.
+- **Data Safety**: Never expose RSVP data or internal lists on the client side.
 
 ---
 
@@ -59,6 +71,7 @@ Before writing any code, the builder MUST:
 
 - ALL custom components MUST live in: `@/components`
 - No additional component directories may be created
+- **Check existing primitives**: Before creating a new UI component, check `@/components/ui` for existing bespoke primitives (e.g., `field.tsx`, `input-group.tsx`).
 
 ### shadcn/ui Components
 
@@ -74,6 +87,7 @@ Before writing any code, the builder MUST:
 - Raw `<img>` tags are NOT allowed
 - Raw `<a>` tags are NOT allowed for internal navigation
 - **NEVER use `legacyBehavior` on `Link`**
+- **Motion Usage**: Always use `motion/react`. Forbid `framer-motion` imports to maintain consistency.
 
 ---
 
@@ -210,6 +224,7 @@ The navigation MUST:
 - Optimize all images
 - Avoid heavy media
 - Lazy-load non-critical sections
+- **Sticky Nav Offset**: All sections MUST include `scroll-margin-top` (via Tailwind `scroll-mt-[offset]`) to account for the sticky navigation height.
 - Prevent layout shift
 - Framer Motion usage must be subtle and brief
 
