@@ -7,7 +7,7 @@ export const siteConfig = {
   URL: 'https://wedding-elegant-template.vercel.app/',
 
   DESCRIPTION:
-    'Dołącz do Nas w ten wyjątkowy dzień! Zapraszamy na ślub i wesele Marzeny i Wojciecha w Gdańsku. Sprawdź szczegóły, historię naszej miłości oraz szczegóły wydarzenia. Czekamy na Ciebie!',
+    'Bądźcie z nami, gdy powiemy sobie "Tak"! Serdecznie zapraszamy na ślub i wesele Marzeny i Wojciecha w malowniczym Gdańsku. Na tej stronie znajdziecie wszystkie szczegóły uroczystości, naszą wspólną historię oraz formularz potwierdzenia przybycia. Do zobaczenia!',
   SHORT_DESCRIPTION: 'Marzena & Wojciech - Strona Ślubna',
 
   NAV_ROUTES: [
