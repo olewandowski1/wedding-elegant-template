@@ -4,7 +4,7 @@ import { createMetadata } from '@/lib/metadata';
 import { cn } from '@/lib/utils';
 import '@/styles/globals.css';
 import type { Metadata } from 'next';
-import { Cormorant_Garamond, Inter, Great_Vibes } from 'next/font/google';
+import { Cormorant_Garamond, Great_Vibes, Inter } from 'next/font/google';
 
 const cormorant = Cormorant_Garamond({
   variable: '--font-serif',
@@ -24,7 +24,7 @@ const handwritten = Great_Vibes({
 });
 
 export const metadata: Metadata = createMetadata({
-  title: siteConfig.NAME,
+  title: siteConfig.SHORT_DESCRIPTION,
   description: siteConfig.DESCRIPTION,
 });
 

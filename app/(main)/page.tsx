@@ -1,16 +1,16 @@
-import { Navigation } from '@/components/navigation';
-import { Hero } from '@/components/hero';
-import { Story } from '@/components/story';
 import { Details } from '@/components/details';
-import { InfoSection } from '@/components/info-section';
-import { RSVP } from '@/components/rsvp';
 import { Footer } from '@/components/footer';
+import { Hero } from '@/components/hero';
+import { InfoSection } from '@/components/info-section';
+import { Navigation } from '@/components/navigation';
+import { RSVP } from '@/components/rsvp';
+import { Story } from '@/components/story';
 
 export default function Page() {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className='flex min-h-screen flex-col'>
       <Navigation />
-      <main className="flex-grow">
+      <main className='grow'>
         <Hero />
         <Story />
         <Details />

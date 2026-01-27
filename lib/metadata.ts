@@ -1,25 +1,18 @@
 import { Metadata } from 'next';
+import { siteConfig } from '@/config/site';
 
 interface MetadataProps {
   title: string;
   description: string;
-  ogImage?: string;
 }
 
-export function createMetadata({ title, description, ogImage }: MetadataProps): Metadata {
+export function createMetadata({
+  title,
+  description,
+}: MetadataProps): Metadata {
   return {
+    metadataBase: new URL(siteConfig.URL),
     title,
     description,
-    openGraph: {
-      title,
-      description,
-      images: ogImage ? [{ url: ogImage }] : [],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
-      images: ogImage ? [ogImage] : [],
-    },
   };
 }

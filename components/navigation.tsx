@@ -2,7 +2,7 @@
 
 import { siteConfig } from '@/config/site';
 import { cn } from '@/lib/utils';
-import { motion, useScroll } from 'motion/react';
+import { AnimatePresence, motion, useScroll } from 'motion/react';
 import Link from 'next/link';
 import * as React from 'react';
 
@@ -11,6 +11,15 @@ export function Navigation() {
   const [activeSection, setActiveSection] = React.useState('hero');
   const [scrolled, setScrolled] = React.useState(false);
   const { scrollY } = useScroll();
+  const navRef = React.useRef<HTMLElement | null>(null);
+  const sectionIds = React.useMemo(
+    () => siteConfig.NAV_ROUTES.map((route) => route.href.replace('#', '')),
+    [],
+  );
+  const isAutoScrollingRef = React.useRef(false);
+  const autoScrollTimeoutRef = React.useRef<ReturnType<
+    typeof setTimeout
+  > | null>(null);
 
   React.useEffect(() => {
     return scrollY.on('change', (latest) => {
@@ -26,20 +35,52 @@ export function Navigation() {
     const id = href.replace('#', '');
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      if (autoScrollTimeoutRef.current) {
+        clearTimeout(autoScrollTimeoutRef.current);
+      }
+      isAutoScrollingRef.current = true;
+      const offset = (navRef.current?.offsetHeight ?? 0) + 16;
+      const top = element.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
       setIsOpen(false);
       setActiveSection(id);
       window.history.replaceState(null, '', href);
+      autoScrollTimeoutRef.current = setTimeout(() => {
+        isAutoScrollingRef.current = false;
+      }, 700);
     }
   };
+
+  const updateActiveSection = React.useCallback(() => {
+    if (isAutoScrollingRef.current) return;
+    const offset = (navRef.current?.offsetHeight ?? 0) + 24;
+    let current = sectionIds[0];
+
+    sectionIds.forEach((id) => {
+      const element = document.getElementById(id);
+      if (!element) return;
+
+      const top = element.getBoundingClientRect().top;
+      if (top - offset <= 0) {
+        current = id;
+      }
+    });
+
+    setActiveSection(current);
+  }, [sectionIds]);
+
+  React.useEffect(() => {
+    if (isAutoScrollingRef.current) return;
+    const newHash = `#${activeSection}`;
+    if (window.location.hash !== newHash) {
+      window.history.replaceState(null, '', newHash);
+    }
+  }, [activeSection]);
 
   React.useEffect(() => {
     // Set initial active section from hash if present
     const hash = window.location.hash.replace('#', '');
-    if (
-      hash &&
-      siteConfig.NAV_ROUTES.some((route) => route.href === `#${hash}`)
-    ) {
+    if (hash && sectionIds.includes(hash)) {
       setActiveSection(hash);
       const element = document.getElementById(hash);
       if (element) {
@@ -49,42 +90,42 @@ export function Navigation() {
       }
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const id = entry.target.id;
-            setActiveSection(id);
-            // Update URL hash without jumping
-            const newHash = `#${id}`;
-            if (window.location.hash !== newHash) {
-              window.history.replaceState(null, '', newHash);
-            }
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '-45% 0px -45% 0px' },
-    );
+    let rafId = 0;
+    const onScroll = () => {
+      if (rafId) return;
+      rafId = window.requestAnimationFrame(() => {
+        updateActiveSection();
+        rafId = 0;
+      });
+    };
 
-    siteConfig.NAV_ROUTES.forEach((route) => {
-      const id = route.href.replace('#', '');
-      const element = document.getElementById(id);
-      if (element) observer.observe(element);
-    });
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
 
-    return () => observer.disconnect();
-  }, []);
+    return () => {
+      if (rafId) window.cancelAnimationFrame(rafId);
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      if (autoScrollTimeoutRef.current) {
+        clearTimeout(autoScrollTimeoutRef.current);
+      }
+    };
+  }, [sectionIds, updateActiveSection]);
 
   return (
     <motion.nav
+      ref={navRef}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.8, ease: 'easeOut' }}
       className={cn(
         'fixed top-0 z-50 w-full transition-all duration-700',
         scrolled
-          ? 'bg-background/90 backdrop-blur-md py-4 sm:py-6 shadow-sm'
-          : 'bg-transparent py-6 sm:py-10 md:py-16.5',
+          ? 'bg-background/95 backdrop-blur-md py-4 sm:py-6'
+          : isOpen
+            ? 'bg-white py-4 sm:py-6'
+            : 'bg-transparent py-6 sm:py-10 md:py-16.5',
       )}
     >
       <div className='container mx-auto flex items-center justify-between sm:justify-center px-6 md:px-12'>
@@ -130,9 +171,12 @@ export function Navigation() {
         {/* Mobile menu button - Positioned right with flex-1 for balance */}
         <div className='flex flex-1 justify-end lg:hidden'>
           <button
-            className='p-2'
+            type='button'
+            className='relative z-50 p-2'
             onClick={() => setIsOpen(!isOpen)}
             aria-label='Toggle menu'
+            aria-expanded={isOpen}
+            aria-controls='mobile-nav'
           >
             <div className='flex flex-col space-y-1.5'>
               <span
@@ -161,27 +205,44 @@ export function Navigation() {
         </div>
       </div>
 
-      {/* Mobile Nav */}
-      <motion.div
-        initial={false}
-        animate={
-          isOpen ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }
-        }
-        className='overflow-hidden bg-background md:hidden'
-      >
-        <div className='flex flex-col space-y-6 px-6 py-12'>
-          {siteConfig.NAV_ROUTES.map((route) => (
-            <Link
-              key={route.href}
-              href={route.href}
-              onClick={(e) => scrollToSection(e, route.href)}
-              className='font-serif text-2xl tracking-widest text-foreground hover:opacity-50 transition-all'
+      {/* Mobile/Tablet Nav */}
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <>
+            <motion.div
+              className='fixed inset-0 z-40 bg-white lg:hidden'
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsOpen(false)}
+            />
+            <motion.div
+              id='mobile-nav'
+              className='absolute left-0 right-0 top-full z-50 origin-top overflow-hidden bg-white lg:hidden'
+              initial={{ opacity: 0, y: -12, scaleY: 0.98 }}
+              animate={{ opacity: 1, y: 0, scaleY: 1 }}
+              exit={{ opacity: 0, y: -8, scaleY: 0.98 }}
+              transition={{ duration: 0.2, ease: 'easeOut' }}
             >
-              {route.name}
-            </Link>
-          ))}
-        </div>
-      </motion.div>
+              <div className='flex flex-col gap-4 px-6 py-8'>
+                {siteConfig.NAV_ROUTES.map((route, index) => (
+                  <Link
+                    key={route.href}
+                    href={route.href}
+                    onClick={(e) => scrollToSection(e, route.href)}
+                    className='group flex items-center justify-between font-serif text-xl tracking-[0.2em] text-foreground transition-all hover:opacity-60'
+                  >
+                    <span>{route.name}</span>
+                    <span className='text-xs uppercase tracking-[0.35em] text-foreground/50 group-hover:text-foreground/70'>
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 }

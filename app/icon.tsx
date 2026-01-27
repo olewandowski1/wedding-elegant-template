@@ -15,13 +15,19 @@ export default function Icon() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: 'transparent',
+        background: 'white',
+        borderRadius: '20%',
+        border: '1px solid #c5a028',
       }}
     >
-      <svg width='32' height='32' viewBox='0 0 100 100' fill='none'>
+      <svg width='24' height='24' viewBox='0 0 100 100' fill='none'>
         <path
-          d='M50 85s-35-20-35-45a20 20 0 1 1 40-5 20 20 0 1 1 40 5c0 25-35 45-35 45Z'
+          d='M50 30 C 50 20, 15 20, 15 45 C 15 70, 50 85, 50 85 C 50 85, 85 70, 85 45 C 85 20, 50 20, 50 30'
           fill='#c5a028'
+          stroke='#c5a028'
+          strokeWidth='6'
+          strokeLinecap='round'
+          strokeLinejoin='round'
         />
       </svg>
     </div>,
