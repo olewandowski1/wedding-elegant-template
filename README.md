@@ -1,111 +1,101 @@
-# Event Template
+# Wedding Elegant Template
 
-Elegant and functional event website starter built with **Next.js (App Router)**, **Tailwind CSS v4**, and **shadcn/ui**.
+A sophisticated and functional wedding website template built with **Next.js (App Router)**, **Tailwind CSS v4**, and **shadcn/ui**.
 
-This template is meticulously designed for building high-quality websites for milestone events such as:
+This template is meticulously designed for high-quality wedding websites, featuring a **Classic & Elegant** aesthetic with a focus on refined whitespace and gold accents.
 
-- 💍 **Weddings** – Shared stories, schedules, and registry links.
-- 🎉 **Anniversaries** – Celebratory galleries and event details.
-- 🎂 **Birthdays & Galas** – RSVPs and venue information.
-- 🤝 **Meetups & Conferences** – Speaker lists and agendas.
+## 💍 Marzena & Wojciech – June 20, 2028
 
-## Features
+This repository contains the "Marzena & Wojciech" wedding website, designed to provide guests with all ceremony details, their journey, and a seamless RSVP experience.
 
-- **Next.js App Router** – Modern routing with server components.
-- **Tailwind CSS v4** – Next-gen CSS engine with native variables.
-- **shadcn/ui** – Elegant UI components for a polished look.
-- **Theming** – Support for light/dark modes, often useful for "mood" based event styles.
-- **Mobile First** – Designed to look great on guests' phones.
+## ✨ Features
 
-## Quick start
+- **Next.js App Router** – Modern routing with server-side rendering and performance optimizations.
+- **Tailwind CSS v4** – Leveraging the latest CSS engine for high-performance styling and native variables.
+- **shadcn/ui** – Polished, accessible, and customizable UI components.
+- **Access Gate** – Security feature to protect private event details with a password/code.
+- **Multilingual Support (i18n)** – Built-in support for multiple languages (currently Polish and English).
+- **Smooth Animations** – Subtle and elegant motion using **Framer Motion**.
+- **Responsive Design** – Optimized for all devices, from desktop to mobile.
+- **Classic Aesthetic** – Strictly enforced light theme with gold (#D4AF37) and navy (#2C3E50) accents.
+
+## 🚀 Tech Stack
+
+- **Framework:** [Next.js](https://nextjs.org/)
+- **Styling:** [Tailwind CSS v4](https://tailwindcss.com/)
+- **UI Components:** [shadcn/ui](https://ui.shadcn.com/)
+- **Animations:** [Framer Motion](https://motion.dev/)
+- **State/Form Management:** [React Hook Form](https://react-hook-form.com/) & [Zod](https://zod.dev/)
+- **Internationalization:** [next-intl](https://next-intl-docs.vercel.app/)
+
+## 🛠️ Quick Start
 
 ### Prerequisites
 
 - Node.js (LTS recommended)
-- pnpm
+- pnpm (recommended) or npm/yarn
 
-### Install & run
+### Install & Run
 
 ```bash
 pnpm install
 pnpm dev
 ```
 
-Then open `http://localhost:3000`.
+The site will be available at `http://localhost:3000`.
 
-## Event Page Setup
+## ⚙️ Configuration
 
-### 1) Personalize your Event Sections
+### 1) Personalize Site Metadata
 
-The default entry page is `app/(main)/page.tsx`. Customize it with typical event sections:
+Edit `config/site.ts` to set the event details:
 
-- **Hero:** Big announcement (e.g., "Save the Date" or names).
-- **Our Story:** Timeline or description of the hosts/celebrants.
-- **Event Detail:** Date, time, and precise venue locations (Google Maps links).
-- **RSVP:** A form or clear instructions for guests to confirm attendance.
-- **Schedule:** Day-of-event timeline (Agendas).
-- **Registry/Gifts:** Links to preferred stores or donation funds.
-- **Photo Gallery:** Memories of the celebrants.
+- `NAME`: The couple's names.
+- `DESCRIPTION`: SEO-friendly meta description.
+- `NAV_ROUTES`: Navigation links for the one-page scroll.
 
-### 2) Configure Event Identity
+### 2) Content & Translations
 
-Edit `config/site.ts` to set global event details:
+Manage all text content in the `messages/` folder:
 
-- `NAME`: Event title (e.g., "Anna & John's Wedding").
-- `DESCRIPTION`: A short welcome message or detail for SEO.
-- `URL`: The domain where your event site will live.
-- `SOCIALS`: Links to social profiles if applicable.
+- `pl.json`: Polish translations (primary).
+- `en.json`: English translations.
 
-### 3) Visual Assets & OG Images
+### 3) Visual Assets
 
-- Replace `public/og-image.svg` with a beautiful photo or branded graphic for social shares.
-- Update `config/site.ts` `OG_IMAGE_URL` if necessary.
-- Update `app/icon.tsx` with a custom event icon/logo.
+- Replace images in `public/images/`.
+- Update the favicons and Open Graph images in the `app/` directory (`icon.tsx`, `opengraph-image.tsx`).
 
-### 4) Theming & Mood
+### 4) Access Control
 
-Set `FIXED_THEME` in `config/site.ts` to `'light'` or `'dark'` to lock the vibe, or leave as `null` for system-aware themes.
+The `AccessGate` component in `app/(main)/page.tsx` handles entrance security. Configure your access logic or remove it if a public site is desired.
+
+## 📂 Project Structure
+
+- `app/` – Next.js routes, layouts, and metadata.
+- `components/` – React components (Hero, Story, Details, RSVP, etc.).
+  - `components/ui/` – Base UI elements from shadcn/ui.
+- `config/` – Global site configuration and constants.
+- `i18n/` – Internationalization setup.
+- `lib/` – Utility functions and shared logic.
+- `messages/` – Translation dictionaries (JSON).
+- `public/` – Static assets (images, fonts).
+- `styles/` – Global CSS and Tailwind configuration.
+
+## 📝 Deployment
+
+The easiest way to deploy is using the [Vercel Platform](https://vercel.com/new).
+
+```bash
+# Example build command
+pnpm build
+```
 
 ---
 
-## Project structure
+_Made with ❤️ for Marzena & Wojciech._
 
-- `app/` – Next.js routes/layouts
-  - `app/(main)/page.tsx` – current entry page (renders `ComponentExample`)
-  - `app/layout.tsx` – global layout, fonts, metadata, theme provider
-- `components/` – app components and examples
-  - `components/ui/` – shared UI components (shadcn)
-- `config/site.ts` – site name/URL/description/social handles + SEO defaults
-- `styles/globals.css` – Tailwind v4 entry + design tokens (light/dark)
-
-## Technical Reference
-
-### Commands
-
-```bash
-pnpm dev      # run local dev server
-pnpm build    # create production build
-pnpm start    # run production server
-pnpm lint     # run eslint
-pnpm format   # prettier (ts/tsx/mdx)
-```
-
-### Adding UI components (shadcn)
-
-This repo is already configured with `components.json`.
-
-```bash
-pnpm shadcn add button
-```
-
-### Deployment
-
-Deploy as a standard Next.js app.
-
-- Build command: `pnpm build`
-- Start command: `pnpm start`
-
-## Notes
+## 📝 Notes
 
 - The example page includes an external image URL (Unsplash). Replace it for production usage if needed.
 - No environment variables are required by default.
