@@ -23,8 +23,8 @@ export function LanguageSwitcher({ scrolled }: { scrolled?: boolean }) {
   };
 
   const languages = [
-    { code: 'pl', label: 'POLSKI' },
-    { code: 'en', label: 'ENGLISH' },
+    { code: 'pl' },
+    { code: 'en' },
   ];
 
   return (
@@ -54,7 +54,7 @@ export function LanguageSwitcher({ scrolled }: { scrolled?: boolean }) {
               )}
               title={t(lang.code as any)}
             >
-              <span className='relative z-10'>{lang.label}</span>
+              <span className='relative z-10'>{t(lang.code).toUpperCase()}</span>
               {locale === lang.code && (
                 <motion.div
                   layoutId='lang-active-underline'
