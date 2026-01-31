@@ -1,101 +1,94 @@
 # Wedding Elegant Template
 
-A sophisticated and functional wedding website template built with **Next.js (App Router)**, **Tailwind CSS v4**, and **shadcn/ui**.
+A premium, sophisticated, and timeless wedding website starter built with **Next.js 15+ (App Router)**, **Tailwind CSS v4**, and **shadcn/ui**.
 
-This template is meticulously designed for high-quality wedding websites, featuring a **Classic & Elegant** aesthetic with a focus on refined whitespace and gold accents.
+This template is meticulously designed for couples seeking a **classic and regal** aesthetic. It focuses on high-end typography, a clean gold-accented palette, and a formal narrative flow.
 
-## 💍 Marzena & Wojciech – June 20, 2028
+## ✨ Key Features
 
-This repository contains the "Marzena & Wojciech" wedding website, designed to provide guests with all ceremony details, their journey, and a seamless RSVP experience.
+- **🏆 Classic & Elegant Aesthetic** – Refined design system featuring gold (#D4AF37), cream (#FAFAFA), and deep navy (#2C3E50).
+- **🖋️ Sophisticated Typography** – Elegant Serif headings (Playfair Display) paired with clean Sans-Serif body text (Inter).
+- **🌆 Full Viewport Hero** – A grand first impression with full-height imagery and clear event announcements.
+- **🔐 Privacy & Access Gate** – Built-in security to protect private event details with a password/code.
+- **🌍 Multilingual Support (i18n)** – Full support for Polish and English content parity via `next-intl`.
+- **🗺️ Integrated Logistics** – Dedicated sections for Ceremony and Reception with embedded maps and parking info.
+- **💍 Formal RSVP** – A structured, user-friendly form for formal wedding confirmations.
+- **⚡ Modern Stack** – Next.js 15+, Tailwind CSS v4, and shadcn/ui for top-tier performance.
 
-## ✨ Features
-
-- **Next.js App Router** – Modern routing with server-side rendering and performance optimizations.
-- **Tailwind CSS v4** – Leveraging the latest CSS engine for high-performance styling and native variables.
-- **shadcn/ui** – Polished, accessible, and customizable UI components.
-- **Access Gate** – Security feature to protect private event details with a password/code.
-- **Multilingual Support (i18n)** – Built-in support for multiple languages (currently Polish and English).
-- **Smooth Animations** – Subtle and elegant motion using **Framer Motion**.
-- **Responsive Design** – Optimized for all devices, from desktop to mobile.
-- **Classic Aesthetic** – Strictly enforced light theme with gold (#D4AF37) and navy (#2C3E50) accents.
-
-## 🚀 Tech Stack
-
-- **Framework:** [Next.js](https://nextjs.org/)
-- **Styling:** [Tailwind CSS v4](https://tailwindcss.com/)
-- **UI Components:** [shadcn/ui](https://ui.shadcn.com/)
-- **Animations:** [Framer Motion](https://motion.dev/)
-- **State/Form Management:** [React Hook Form](https://react-hook-form.com/) & [Zod](https://zod.dev/)
-- **Internationalization:** [next-intl](https://next-intl-docs.vercel.app/)
-
-## 🛠️ Quick Start
+## 🚀 Quick Start
 
 ### Prerequisites
 
 - Node.js (LTS recommended)
-- pnpm (recommended) or npm/yarn
+- `npm`
 
 ### Install & Run
 
 ```bash
-pnpm install
-pnpm dev
+npm install
+npm run dev
 ```
 
-The site will be available at `http://localhost:3000`.
+Then open [http://localhost:3000](http://localhost:3000).
 
-## ⚙️ Configuration
+## 🛠️ Configuration & Personalization
 
-### 1) Personalize Site Metadata
+### 1. Wedding Identity
 
-Edit `config/site.ts` to set the event details:
+Edit [`config/site.ts`](file:///c:/Users/olive/OneDrive/Obrazy/Dokumenty/Playground/wedding-elegant-template/config/site.ts) to set your global details:
 
-- `NAME`: The couple's names.
-- `DESCRIPTION`: SEO-friendly meta description.
-- `NAV_ROUTES`: Navigation links for the one-page scroll.
+- `NAME`: Your names (e.g., "Marzena & Wojciech").
+- `DESCRIPTION`: Formal SEO and social share message.
+- `NAV_ROUTES`: Customize the navigation menu links.
+- `FIXED_THEME`: Locked to `'light'` for traditional elegance and accessibility.
 
-### 2) Content & Translations
+### 2. Content & Translations
 
 Manage all text content in the `messages/` folder:
 
-- `pl.json`: Polish translations (primary).
-- `en.json`: English translations.
+- [`pl.json`](file:///c:/Users/olive/OneDrive/Obrazy/Dokumenty/Playground/wedding-elegant-template/messages/pl.json) – Polish translations (primary).
+- [`en.json`](file:///c:/Users/olive/OneDrive/Obrazy/Dokumenty/Playground/wedding-elegant-template/messages/en.json) – English translations.
 
-### 3) Visual Assets
+### 3. Sections & Workflow
 
-- Replace images in `public/images/`.
-- Update the favicons and Open Graph images in the `app/` directory (`icon.tsx`, `opengraph-image.tsx`).
+The main entry point is [`app/[locale]/page.tsx`](file:///c:/Users/olive/OneDrive/Obrazy/Dokumenty/Playground/wedding-elegant-template/app/[locale]/page.tsx). Customize the following sections:
 
-### 4) Access Control
-
-The `AccessGate` component in `app/(main)/page.tsx` handles entrance security. Configure your access logic or remove it if a public site is desired.
+- **Hero:** Names and "The Big Day" announcement.
+- **Our Story:** Documentation of your shared journey.
+- **Details:** Logistics for Ceremony and Reception.
+- **Practical Info:** Dress code (Black Tie), gift preferences, and guest tips.
+- **RSVP:** Interactive confirmation form.
 
 ## 📂 Project Structure
 
 - `app/` – Next.js routes, layouts, and metadata.
-- `components/` – React components (Hero, Story, Details, RSVP, etc.).
-  - `components/ui/` – Base UI elements from shadcn/ui.
+- `components/` – Custom wedding components.
+- `components/ui/` – Foundation UI components (shadcn/ui).
 - `config/` – Global site configuration and constants.
-- `i18n/` – Internationalization setup.
-- `lib/` – Utility functions and shared logic.
-- `messages/` – Translation dictionaries (JSON).
-- `public/` – Static assets (images, fonts).
-- `styles/` – Global CSS and Tailwind configuration.
+- `messages/` – Translation files (PL/EN).
+- `styles/globals.css` – Tailwind v4 theme and design tokens.
 
-## 📝 Deployment
+## 📖 Technical Reference
 
-The easiest way to deploy is using the [Vercel Platform](https://vercel.com/new).
+### Commands
 
 ```bash
-# Example build command
-pnpm build
+npm run dev      # run local dev server
+npm run build    # create production build
+npm run start    # run production server
+npm run lint     # run eslint check
+npm run format   # run prettier formatting
 ```
 
----
+### Adding New UI Components
 
-_Made with ❤️ for Marzena & Wojciech._
+This project is configured with `components.json`.
+
+```bash
+npx shadcn@latest add [component-name]
+```
 
 ## 📝 Notes
 
-- The example page includes an external image URL (Unsplash). Replace it for production usage if needed.
-- No environment variables are required by default.
+- **Theming:** This template is strictly enforced as Light Mode to maintain its regal, bright aesthetic.
+- **Privacy:** Configure the `AccessGate` in the root page to manage event visibility.
